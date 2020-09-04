@@ -3,6 +3,9 @@ package com.koenigsea.springredis;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author KoenigSEA
+ */
 @SpringBootApplication
 public class SpringRedisApplication {
 
