@@ -26,11 +26,16 @@ public class ComparisonHandler implements CommandLineRunner {
     }
 
     public void megaComparison() {
-        List<RedisEntity> redisEntities = dataGenerator.megaDataGenerated();
+        List<RedisEntity> redisEntities = dataGenerator.dataGenerated();
+        jedisHandler.flushAllDb();
         long pointA = System.currentTimeMillis();
+        logger.info("Starting Jedis Handler...");
         jedisHandler.megaInsert(redisEntities);
+        logger.info("...Jedis Handler Ended");
         long pointB = System.currentTimeMillis();
+        logger.info("Starting Lettuce Handler...");
         lettuceHandler.megaInsert(redisEntities);
+        logger.info("...Lettuce Handler Ended");
         long pointC = System.currentTimeMillis();
         logger.info("[TIMER] Jedis Inserting Mega Data: " + (pointB - pointA) + "ms");
         logger.info("[TIMER] Lettuce Inserting Mega Data: " + (pointC - pointB) + "ms");

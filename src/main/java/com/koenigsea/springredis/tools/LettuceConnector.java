@@ -23,15 +23,15 @@ public class LettuceConnector {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    public void pipelineAdd(List<RedisEntity> redisEntities) {
+    public boolean pipelineAdd(List<RedisEntity> redisEntities) {
         stringRedisTemplate.executePipelined((RedisCallback<Object>) redisConnection -> {
             StringRedisConnection stringRedisConn = (StringRedisConnection) redisConnection;
             stringRedisConn.select(subDatabase);
-            stringRedisConn.flushDb();
             for (RedisEntity redisEntity : redisEntities) {
                 stringRedisConn.set(redisEntity.getKey(), redisEntity.getValue());
             }
             return null;
         });
+        return true;
     }
 }

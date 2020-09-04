@@ -19,13 +19,18 @@ public class JedisConnector {
         this.jedisPool = jedisPool;
     }
 
-    public void pipelineAdd(List<RedisEntity> redisEntities) {
+    public boolean pipelineAdd(List<RedisEntity> redisEntities) {
         Jedis jedis = jedisPool.getResource();
-        jedis.flushDB();
         Pipeline pipeline = jedis.pipelined();
         for (RedisEntity redisEntity : redisEntities) {
             pipeline.set(redisEntity.getKey(), redisEntity.getValue());
         }
         pipeline.sync();
+        return true;
+    }
+
+    public void flushDb(){
+        Jedis jedis = jedisPool.getResource();
+        jedis.flushAll();
     }
 }

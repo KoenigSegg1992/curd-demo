@@ -1,1 +1,17 @@
+#redis configuration
+spring:
+  redis:
+    host: 127.0.0.1
+    password:
+    port: 6379
+    # timeout: flexible to avoid Pipeline block
+    timeout: 5000
+    database: 0
+    sub-database: 1
+    max-wait-millis: 500
+    max-idle: 50
+    max-total: 500
 
+generator:
+  dataSize: 100000
+  batchSize: 10000

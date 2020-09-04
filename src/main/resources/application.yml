@@ -13,4 +13,5 @@ spring:
     max-total: 500
 
 generator:
-  mega: 1000000
+  dataSize: 100000
+  batchSize: 10000

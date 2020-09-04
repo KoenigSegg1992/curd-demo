@@ -12,12 +12,12 @@ import java.util.List;
  */
 @Component
 public class DataGenerator {
-    @Value("${generator.mega}")
-    private Integer mega;
+    @Value("${generator.dataSize}")
+    private Integer dataSize;
 
-    public List<RedisEntity> megaDataGenerated() {
+    public List<RedisEntity> dataGenerated() {
         List<RedisEntity> results = new ArrayList<>();
-        for (int i = 0; i < mega; i++) {
+        for (int i = 0; i < dataSize; i++) {
             RedisEntity redisEntity = new RedisEntity();
             redisEntity.setKey(keyMaker(i));
             redisEntity.setValue(valueMaker(i));
